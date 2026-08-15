@@ -1,0 +1,29 @@
+---
+import Base from '../../layouts/Base.astro';
+import { getCollection } from 'astro:content';
+
+const posts = (await getCollection('posts')).sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+const fmt = (d: Date) => `${d.getFullYear()}.${String(d.getMonth() + 1).padStart(2, '0')}.${String(d.getDate()).padStart(2, '0')}`;
+---
+<Base title="文章" current="writing">
+  <div class="mv-page mv-wrap">
+    <div class="mv-page-head">
+      <p class="kicker">ARCHIVE</p>
+      <h1>全部文章</h1>
+      <p class="lede">自 2023 年创刊以来的全部写作，工程笔记与徒步手记交替刊出。</p>
+    </div>
+    <div class="mv-cards">
+      {posts.map(post => (
+        <a class="mv-card" href={`/writing/${post.slug}/`}>
+          <span class="c-meta">
+            <span class="mv-tag">{post.data.tag}</span>
+            <span>{fmt(post.data.date)}</span>
+            <span>约 {post.data.minutes} 分钟</span>
+          </span>
+          <h3>{post.data.title}</h3>
+          <p>{post.data.excerpt}</p>
+        </a>
+      ))}
+    </div>
+  </div>
+</Base>
