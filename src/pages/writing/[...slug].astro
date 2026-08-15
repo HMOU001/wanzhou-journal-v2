@@ -1,0 +1,40 @@
+---
+import Base from '../../layouts/Base.astro';
+import { getCollection } from 'astro:content';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('posts');
+  return posts.map(post => ({ params: { slug: post.slug }, props: { post } }));
+}
+
+const { post } = Astro.props;
+const { Content } = await post.render();
+
+const all = (await getCollection('posts')).sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+const idx = all.findIndex(p => p.slug === post.slug);
+const prev = idx > 0 ? all[idx - 1] : null;
+const next = idx < all.length - 1 ? all[idx + 1] : null;
+
+const d = post.data.date;
+const dateStr = `${d.getFullYear()} 年 ${d.getMonth() + 1} 月 ${d.getDate()} 日`;
+---
+<Base title={post.data.title} description={post.data.excerpt} current="writing">
+  <article>
+    <header class="mv-article-head mv-wrap mv-rise">
+      <span class="mv-tag">{post.data.tag}</span>
+      <h1>{post.data.title}</h1>
+      <p class="mv-article-meta">{dateStr} · 全文约 {post.data.minutes} 分钟</p>
+    </header>
+    <div class="mv-prose mv-wrap mv-rise mv-rise-1">
+      <Content />
+    </div>
+    <nav class="mv-article-nav mv-wrap" aria-label="上下篇">
+      {prev ? (
+        <a href={`/writing/${prev.slug}/`}>上一篇（更新）<strong>{prev.data.title}</strong></a>
+      ) : <span style="flex:1"></span>}
+      {next && (
+        <a class="next" href={`/writing/${next.slug}/`}>下一篇（更早）<strong>{next.data.title}</strong></a>
+      )}
+    </nav>
+  </article>
+</Base>
