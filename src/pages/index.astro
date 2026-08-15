@@ -1,0 +1,63 @@
+---
+import Base from '../layouts/Base.astro';
+import { getCollection } from 'astro:content';
+
+const posts = (await getCollection('posts')).sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+const fmt = (d: Date) => `${d.getFullYear()}.${String(d.getMonth() + 1).padStart(2, '0')}.${String(d.getDate()).padStart(2, '0')}`;
+---
+<Base title="首页" current="home">
+
+  <section class="mv-hero">
+    <img src="/images/hero-bluehour.png" alt="蓝调时刻的山脊之上，一张摆着笔记本与黄铜台灯的书桌" loading="eager">
+    <div class="mv-hero-stack">
+      <p class="mv-hero-kicker mv-rise">林晚舟的写作刊物 · 第 47 期</p>
+      <h1 class="mv-rise mv-rise-1">写代码，写字，<br>走进山里。</h1>
+      <p class="sub mv-rise mv-rise-2">一个前端工程师的建造笔记，和一个徒步者的离线思考。更新不快，每篇都写过三遍。</p>
+      <form class="mv-capture mv-rise mv-rise-2" action="/subscribe/" method="get">
+        <input type="email" name="email" placeholder="你的邮箱地址" aria-label="邮箱地址">
+        <button type="submit">订阅新刊</button>
+      </form>
+      <p class="mv-hero-note mv-rise mv-rise-2">一个月最多两封，随时可退。也可以用 RSS。</p>
+    </div>
+  </section>
+
+  <section class="mv-section mv-wrap" aria-labelledby="latest-heading">
+    <div class="mv-section-head">
+      <h2 id="latest-heading">最新文章</h2>
+      <a class="more" href="/writing/">全部文章 →</a>
+    </div>
+    <div class="mv-cards">
+      {posts.map(post => (
+        <a class="mv-card" href={`/writing/${post.slug}/`}>
+          <span class="c-meta">
+            <span class="mv-tag">{post.data.tag}</span>
+            <span>{fmt(post.data.date)}</span>
+            <span>约 {post.data.minutes} 分钟</span>
+          </span>
+          <h3>{post.data.title}</h3>
+          <p>{post.data.excerpt}</p>
+        </a>
+      ))}
+    </div>
+  </section>
+
+  <section class="mv-section mv-wrap" aria-labelledby="projects-heading" style="padding-bottom:8px;">
+    <div class="mv-section-head">
+      <h2 id="projects-heading">专题</h2>
+      <a class="more" href="/projects/">全部专题 →</a>
+    </div>
+    <div class="mv-grid-2">
+      <a class="mv-card" href="/projects/">
+        <span class="c-meta"><span class="mv-tag">SIDE PROJECT</span><span>2024 — 至今</span></span>
+        <h3>trail-notes</h3>
+        <p>离线优先的徒步轨迹记录 PWA。无网可记、出山同步，轨迹与手记存在同一个 Markdown 文件里。</p>
+      </a>
+      <a class="mv-card" href="/projects/">
+        <span class="c-meta"><span class="mv-tag">OPEN SOURCE</span><span>2025</span></span>
+        <h3>rss-reader-tui</h3>
+        <p>终端里的 RSS 阅读器。Vim 键位，纯键盘操作，为「读完就结束」的阅读体验而设计。</p>
+      </a>
+    </div>
+  </section>
+
+</Base>
