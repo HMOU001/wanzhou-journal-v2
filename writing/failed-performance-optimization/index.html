@@ -1,0 +1,28 @@
+<!DOCTYPE html><html lang="zh-CN"> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="theme-color" content="#171721"><title>一次失败的性能优化复盘 · 晚舟手记（蓝山夜色版）</title><meta name="description" content="LCP 从 3.1 秒优化到 1.9 秒，业务指标却纹丝不动。问题出在哪，两个月后我才想明白。"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"><link rel="alternate" type="application/rss+xml" title="晚舟手记 RSS" href="../../rss.xml"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&family=Inter:opsz,wght@14..32,100..900&display=swap" rel="stylesheet"><link rel="stylesheet" href="../../_astro/about.CqHns8VM.css"><script type="module">const e=document.getElementById("mvNav"),l=()=>e&&e.classList.toggle("scrolled",window.scrollY>24);l();window.addEventListener("scroll",l,{passive:!0});
+</script></head> <body> <header class="mv-nav" id="mvNav"> <div class="mv-nav-inner"> <a class="mv-brand" href="../../index.html"><span class="brand-full">WANZHOU'S JOURNAL</span><span class="brand-short">晚舟手记</span></a> <nav class="mv-links" aria-label="主导航"> <a href="../../writing/index.html" aria-current="page">文章</a><a href="../../projects/index.html">专题</a><a href="../../about/index.html">关于</a> </nav> <a class="mv-cta" href="../../subscribe/index.html">订阅新刊</a> </div> </header> <main>  <article> <header class="mv-article-head mv-wrap mv-rise"> <span class="mv-tag">工程笔记</span> <h1>一次失败的性能优化复盘</h1> <p class="mv-article-meta">2026 年 6 月 28 日 · 全文约 11 分钟</p> </header> <div class="mv-prose mv-wrap mv-rise mv-rise-1"> <p>这是一次失败的复盘。技术上的每一步都堪称教科书，结果上它几乎没有产生任何业务价值。把它写出来，是因为这种失败比成功更难看到有人讲。</p>
+<h2 id="背景">背景</h2>
+<p>今年四月，我负责的活动页被点名：Lighthouse 性能分 58，LCP 3.1 秒。优化目标很明确，手段也都是标准动作。两周后上线：LCP 1.9 秒，性能分 91，团队周会上还展示了一下。</p>
+<p>一个月后看数据：跳出率没变，转化率没变，停留时长没变。</p>
+<h2 id="我们做了什么">我们做了什么</h2>
+<p>技术上没有偷懒，列出来都是常规正确项：</p>
+<ul>
+<li>首屏大图从 1.2 MB 压到 210 KB，换了 AVIF，加了 <code>fetchpriority="high"</code></li>
+<li>三个第三方脚本改成延迟加载，其中一个直接删了</li>
+<li>字体子集化，从 380 KB 降到 46 KB</li>
+<li>关键 CSS 内联，其余异步</li>
+</ul>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>LCP   3.1s  →  1.9s</span></span>
+<span class="line"><span>INP   280ms →  120ms</span></span>
+<span class="line"><span>CLS   0.18  →  0.02</span></span>
+<span class="line"><span></span></span></code></pre>
+<p>数字漂亮，体验也确实快了。那问题出在哪？</p>
+<h2 id="两个月后想明白的事">两个月后想明白的事</h2>
+<p>复盘是在六月的季度总结里被迫做的。结论有三条，按疼痛程度排序：</p>
+<blockquote>
+<p>我们优化的是「页面加载」，用户在意的是「事情办成」。这两件事的相关性，没有性能布道者说的那么强。</p>
+</blockquote>
+<p>第一，这个页面的流量大头是活动期内投放带来的，用户意图极强——他们就是来报名的，3.1 秒也等得起。第二，真正拖垮转化的是报名表单本身，七个字段、两个必填的验证码，这一步的流失率是加载阶段的四倍。第三，性能分是团队的指标，不是用户的指标。</p>
+<p>性能优化当然是对的。但它排在表单简化后面，而我们先做性能，是因为它更好做、更好量化、更好展示。</p>
+<h2 id="现在的规矩">现在的规矩</h2>
+<p>这以后我给自己立了一条规矩：任何优化动工前，先回答「用户在哪个环节真的被卡住了」。如果答案来自猜测而不是数据，那就先去拿数据，哪怕拿数据这件事本身要花一星期。</p>
+<p>快是好的。但快不是目的，是手段——这句话人人都说，轮到排期时人人都忘。</p> </div> <nav class="mv-article-nav mv-wrap" aria-label="上下篇"> <a href="../../writing/rss-information-diet/index.html">上一篇（更新）<strong>我如何用 RSS 重建信息食谱</strong></a> <a class="next" href="../../writing/offline-writing-on-trail/index.html">下一篇（更早）<strong>山间 LTE：徒步时的离线写作流</strong></a> </nav> </article>  </main> <footer class="mv-footer"> <div class="mv-wrap"> <div> <a class="mv-brand" href="../../index.html">WANZHOU'S JOURNAL</a> <p>工程笔记、数字生活与徒步手记。更新不快，每篇都写过三遍。</p> </div> <nav aria-label="页脚导航"> <a href="../../writing/index.html">文章</a> <a href="../../projects/index.html">专题</a> <a href="../../about/index.html">关于</a> <a href="../../subscribe/index.html">订阅</a> <a href="../../rss.xml">RSS</a> </nav> </div> <div class="mv-wrap"> <div class="mv-fineprint"> <span>本刊无广告，服务器是印厂，光纤是邮路。</span> <span>Est. 2023 · No. 47 · Set in Archivo &amp; Inter</span> </div> </div> </footer>  </body> </html>
