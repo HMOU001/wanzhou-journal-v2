@@ -1,0 +1,82 @@
+---
+import '../styles/mercury.css';
+
+interface Props {
+  title: string;
+  description?: string;
+  current?: 'writing' | 'projects' | 'about' | 'subscribe' | 'home';
+}
+
+const {
+  title,
+  description = '林晚舟的个人写作刊物：工程笔记、数字生活与徒步手记。',
+  current = 'home'
+} = Astro.props;
+
+const nav = [
+  { href: '/writing/', key: 'writing', label: '文章' },
+  { href: '/projects/', key: 'projects', label: '专题' },
+  { href: '/about/', key: 'about', label: '关于' }
+];
+---
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#171721">
+  <title>{title} · 晚舟手记（蓝山夜色版）</title>
+  <meta name="description" content={description}>
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="alternate" type="application/rss+xml" title="晚舟手记 RSS" href="/rss.xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&family=Inter:opsz,wght@14..32,100..900&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header class="mv-nav" id="mvNav">
+    <div class="mv-nav-inner">
+      <a class="mv-brand" href="/"><span class="brand-full">WANZHOU'S JOURNAL</span><span class="brand-short">晚舟手记</span></a>
+      <nav class="mv-links" aria-label="主导航">
+        {nav.map(item => (
+          <a href={item.href} aria-current={current === item.key ? 'page' : undefined}>{item.label}</a>
+        ))}
+      </nav>
+      <a class="mv-cta" href="/subscribe/">订阅新刊</a>
+    </div>
+  </header>
+
+  <main>
+    <slot />
+  </main>
+
+  <footer class="mv-footer">
+    <div class="mv-wrap">
+      <div>
+        <a class="mv-brand" href="/">WANZHOU'S JOURNAL</a>
+        <p>工程笔记、数字生活与徒步手记。更新不快，每篇都写过三遍。</p>
+      </div>
+      <nav aria-label="页脚导航">
+        <a href="/writing/">文章</a>
+        <a href="/projects/">专题</a>
+        <a href="/about/">关于</a>
+        <a href="/subscribe/">订阅</a>
+        <a href="/rss.xml">RSS</a>
+      </nav>
+    </div>
+    <div class="mv-wrap">
+      <div class="mv-fineprint">
+        <span>本刊无广告，服务器是印厂，光纤是邮路。</span>
+        <span>Est. 2023 · No. 47 · Set in Archivo &amp; Inter</span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const nav = document.getElementById('mvNav');
+    const onScroll = () => nav && nav.classList.toggle('scrolled', window.scrollY > 24);
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+  </script>
+</body>
+</html>
