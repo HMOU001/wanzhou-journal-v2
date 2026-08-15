@@ -1,0 +1,26 @@
+---
+import Base from '../layouts/Base.astro';
+---
+<Base title="订阅" current="subscribe">
+  <div class="mv-page mv-wrap">
+    <div class="mv-page-head">
+      <p class="kicker">SUBSCRIBE</p>
+      <h1>如何收到新刊</h1>
+      <p class="lede">没有算法推荐，没有推送打扰。两种订阅方式，都免费，都随时可退。</p>
+    </div>
+    <div class="mv-grid-2">
+      <article class="mv-card">
+        <span class="c-meta"><span class="mv-tag">推荐</span></span>
+        <h3>RSS 订阅</h3>
+        <p>把下面这个地址加进任何 RSS 阅读器即可。全文输出，无跟踪参数：</p>
+        <p style="margin-top:16px;"><code>https://wanzhou.blog/rss.xml</code></p>
+      </article>
+      <article class="mv-card">
+        <span class="c-meta"><span class="mv-tag">备用</span></span>
+        <h3>邮件订阅</h3>
+        <p>不习惯 RSS 的话，新刊也会通过邮件投递，一个月最多两封，正文即全文。发一封标题为「订阅」的邮件到 hi@wanzhou.blog 即可加入列表，随时来信「退订」即可移出。</p>
+        <p style="margin-top:20px;"><a class="mv-btn" href="mailto:hi@wanzhou.blog?subject=%E8%AE%A2%E9%98%85">发邮件订阅</a></p>
+      </article>
+    </div>
+  </div>
+</Base>
