@@ -1,0 +1,19 @@
+<!DOCTYPE html><html lang="zh-CN"> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="theme-color" content="#171721"><title>把博客迁到 Astro 的那个周末 · 晚舟手记（蓝山夜色版）</title><meta name="description" content="从 WordPress 到 Astro，两天时间，三百篇文章，一次不算完美但足够痛快的搬家。"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"><link rel="alternate" type="application/rss+xml" title="晚舟手记 RSS" href="../../rss.xml"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&family=Inter:opsz,wght@14..32,100..900&display=swap" rel="stylesheet"><link rel="stylesheet" href="../../_astro/about.CqHns8VM.css"><script type="module">const e=document.getElementById("mvNav"),l=()=>e&&e.classList.toggle("scrolled",window.scrollY>24);l();window.addEventListener("scroll",l,{passive:!0});
+</script></head> <body> <header class="mv-nav" id="mvNav"> <div class="mv-nav-inner"> <a class="mv-brand" href="../../index.html"><span class="brand-full">WANZHOU'S JOURNAL</span><span class="brand-short">晚舟手记</span></a> <nav class="mv-links" aria-label="主导航"> <a href="../../writing/index.html" aria-current="page">文章</a><a href="../../projects/index.html">专题</a><a href="../../about/index.html">关于</a> </nav> <a class="mv-cta" href="../../subscribe/index.html">订阅新刊</a> </div> </header> <main>  <article> <header class="mv-article-head mv-wrap mv-rise"> <span class="mv-tag">工程笔记</span> <h1>把博客迁到 Astro 的那个周末</h1> <p class="mv-article-meta">2026 年 8 月 2 日 · 全文约 7 分钟</p> </header> <div class="mv-prose mv-wrap mv-rise mv-rise-1"> <p>周六早上九点，我关掉了 WordPress 后台的最后一个标签页。这个决定酝酿了半年，执行只用了两天。周日晚上十一点，新站上线，构建时间 41 秒，首页体积 86 KB。</p>
+<h2 id="为什么搬走">为什么搬走</h2>
+<p>旧站不是不能用，是每一处都要妥协。主题改一行 CSS 要穿过三层定制器；想给文章加一种「页边注」排版，插件市场里找不到，自己写又要和主题的模板层级搏斗。写作本身是愉快的，维护写作环境不是。</p>
+<p>压垮它的最后一根稻草是一次例行更新：某个缓存插件升级后，全站文章的代码块样式集体失效。我花了两个小时排查，最后发现是它把 <code>pre</code> 标签的类名重写了一遍。那天晚上我决定，这个站的一砖一瓦，我要自己能看懂。</p>
+<h2 id="搬家清单">搬家清单</h2>
+<p>实际的工作量集中在三件事上：</p>
+<ol>
+<li><strong>内容导出</strong>：WordPress 的 XML 导出转 Markdown，用了一个现成的脚本，又手改了 frontmatter 的映射。三百篇文章里有两百八十多篇一次通过，剩下的多是早年从别的平台迁来时留下的格式残渣。</li>
+<li><strong>URL 不搬家</strong>：旧链接全部保留原路径，这是底线。搜索引擎的收录、别人文章里的引用，都不能断。Astro 的静态路由让这件事很直白。</li>
+<li><strong>设计重做</strong>：没有套主题。杂志式的排版是手写的，规矩线、期号、首字下沉，都是 CSS 里最朴素的写法。</li>
+</ol>
+<p class="marginnote">顺带一提：迁移过程中删掉了一百多篇 2019 年以前的短帖。它们更像当时的碎碎念，不像文章。刊物要有编辑，编辑要舍得删。</p>
+<h2 id="两天之后">两天之后</h2>
+<p>现在的写作流是：VS Code 里写 Markdown，git push，构建部署自动完成。没有后台，没有插件更新提醒，没有数据库备份焦虑。</p>
+<blockquote>
+<p>工具的最好状态，是你忘记它的存在，只记得自己要写什么。</p>
+</blockquote>
+<p>如果说有什么遗憾，是评论功能暂时没有搬过来。静态站的评论方案都不那么干净，我还在想这件事值不值得做。在那之前，邮件永远有效。</p> </div> <nav class="mv-article-nav mv-wrap" aria-label="上下篇"> <span style="flex:1"></span> <a class="next" href="../../writing/rss-information-diet/index.html">下一篇（更早）<strong>我如何用 RSS 重建信息食谱</strong></a> </nav> </article>  </main> <footer class="mv-footer"> <div class="mv-wrap"> <div> <a class="mv-brand" href="../../index.html">WANZHOU'S JOURNAL</a> <p>工程笔记、数字生活与徒步手记。更新不快，每篇都写过三遍。</p> </div> <nav aria-label="页脚导航"> <a href="../../writing/index.html">文章</a> <a href="../../projects/index.html">专题</a> <a href="../../about/index.html">关于</a> <a href="../../subscribe/index.html">订阅</a> <a href="../../rss.xml">RSS</a> </nav> </div> <div class="mv-wrap"> <div class="mv-fineprint"> <span>本刊无广告，服务器是印厂，光纤是邮路。</span> <span>Est. 2023 · No. 47 · Set in Archivo &amp; Inter</span> </div> </div> </footer>  </body> </html>
