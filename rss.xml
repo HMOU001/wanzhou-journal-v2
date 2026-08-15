@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0">
+  <channel>
+    <title>晚舟手记</title>
+    <link>https://wanzhou.blog/</link>
+    <description>林晚舟的个人写作刊物：工程笔记、数字生活与徒步手记。</description>
+    <language>zh-CN</language>
+    <item>
+      <title>把博客迁到 Astro 的那个周末</title>
+      <link>https://wanzhou.blog/writing/migrate-to-astro/</link>
+      <guid isPermaLink="true">https://wanzhou.blog/writing/migrate-to-astro/</guid>
+      <pubDate>Sun, 02 Aug 2026 00:00:00 GMT</pubDate>
+      <description>从 WordPress 到 Astro，两天时间，三百篇文章，一次不算完美但足够痛快的搬家。</description>
+      <category>工程笔记</category>
+    </item>
+    <item>
+      <title>我如何用 RSS 重建信息食谱</title>
+      <link>https://wanzhou.blog/writing/rss-information-diet/</link>
+      <guid isPermaLink="true">https://wanzhou.blog/writing/rss-information-diet/</guid>
+      <pubDate>Sun, 19 Jul 2026 00:00:00 GMT</pubDate>
+      <description>卸载三个资讯 App 之后，我用 42 个 RSS 源重新安排了自己每天读什么。</description>
+      <category>数字生活</category>
+    </item>
+    <item>
+      <title>一次失败的性能优化复盘</title>
+      <link>https://wanzhou.blog/writing/failed-performance-optimization/</link>
+      <guid isPermaLink="true">https://wanzhou.blog/writing/failed-performance-optimization/</guid>
+      <pubDate>Sun, 28 Jun 2026 00:00:00 GMT</pubDate>
+      <description>LCP 从 3.1 秒优化到 1.9 秒，业务指标却纹丝不动。问题出在哪，两个月后我才想明白。</description>
+      <category>工程笔记</category>
+    </item>
+    <item>
+      <title>山间 LTE：徒步时的离线写作流</title>
+      <link>https://wanzhou.blog/writing/offline-writing-on-trail/</link>
+      <guid isPermaLink="true">https://wanzhou.blog/writing/offline-writing-on-trail/</guid>
+      <pubDate>Sun, 07 Jun 2026 00:00:00 GMT</pubDate>
+      <description>徽杭古道三天，两篇文章草稿，一套在没有信号的地方也能运转的写作系统。</description>
+      <category>徒步手记</category>
+    </item>
+  </channel>
+</rss>
